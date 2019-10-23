@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	body{
+		margin:0;
+		padding:0;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		background: #222;
+	}
+</style>
+<body>
+	<canvas id="cvs" ></canvas>
+</body>
+<script>
+
+let drawm = {
+		
+		mainarr:[],//[ctx,cvs,ch,cw];
+		ccol:"280",
+
+		createCanvas(a,b,c,d){
+			ctx.clearRect(0,0,c,d);
+			ctx.fillStyle = "hsl("+this.ccol+",100%,50%)";
+			ctx.fillRect(0,0,c,d);
+			ctx.fill();
+			drawm.rndnum();
+	    },
+
+	    createRect(x,y,w,h,c){
+			ctx.fillStyle = "hsl("+c+",100%,50%)";;
+			ctx.fillRect(x,y,w,h);
+			ctx.fill();
+	    },
+
+	    resetSize(){
+	    	// for(i=0;i<marr.length;i++){
+	    	// 	if(i==3)break;
+	    	// 	i%2?cv=csh:cv=csw
+	    		
+	    	// 	marr[i] = cv;
+	    	// }
+	    	marr[0] = 0
+	    	marr[1] = 0
+	    	marr[2] = csw
+	    	marr[3] = csh
+	    	console.log(marr)
+	    	
+
+
+	    	drawm.createCanvas(0,0,csw,csh);
+	    },
+	  
+	    getArr(xy,x,d){
+	    	if(marr[3]<1 || marr[2]<1)drawm.resetSize();
+
+	    	else if(marr[2]>marr[3]){
+	    		marr[2] = Math.floor(marr[2] / 2);
+	    		//alert(marr[2]+"\n"+marr[3])
+	    		d!=0?marr[0] += marr[2]:{};
+	    
+	    	}else if(marr[2]<marr[3]){
+	    		marr[3] = Math.floor(marr[3] / 2);
+	    		d!=0?marr[1] += marr[3]:{};
+	    	}
+
+
+
+
+	    	else if(xy==0 && x==0){
+	    		if(marr[0]==csw){
+	    			marr[0] -= marr[0];
+	    			marr[1] -= marr[1];
+	    			marr[2]/2	
+	    			marr[2] /= 2
+	    		}else{
+	    			marr[2] /= 2
+	    		}
+	    	}
+
+	    	else if(xy==0 && x==1){
+	    		if(marr[0]==csw){
+	    			marr[0] /= 2;
+	    			marr[1] -= marr[1];
+	    			marr[2] /= 2;
+	    		}else{
+	    			marr[0] = marr[2]/2 + marr[0];
+	    			marr[2] /= 2;
+	    		}
+	    	}
+
+	    	else if(xy==1 && x==0){
+	    		if(marr[1]==csh){
+	    			marr[0] -= marr[0];
+	    			marr[1] -= marr[1];
+	    			marr[3] /= 2;
+	    		}else{
+	    			marr[3] /= 2;
+	    		}
+	    		
+	    	}
+
+	    	else if(xy==1 && x==1){
+	    		if(marr[0]==csw){
+	    			marr[0] -= marr[0];
+	    			marr[1] /= 2
+	    			marr[3] /=2;
+	    		}else{
+	    			marr[1] += marr[3]/2 
+	    			marr[3] /= 2;
+	    		}
+	    	}
+	    	marr[4] = gc();
+	    	console.log(marr[3])
+	    	drawm.createRect.apply(null,marr);
+	    },
+
+	    rndnum(){
+	    	selXY = Math.floor(Math.random()*2);//0 = X 1 = Y
+	    	posX  = Math.floor(Math.random()*2); //0 = ls 1 = rs
+	    	dir = Math.floor(Math.random()*2);
+	    	
+	    	rndn = [selXY,posX,dir];
+	    	this.getArr.apply(null,rndn);
+	    },
+
+	    getCol(){
+	    	r  = Math.round(Math.random()*360)
+	    	curc == r?r+=5:{}
+	    	curc  = r;
+	    	return r//arrc[co]
+	    },
+
+	    delay(ms){
+	    	setInterval(function(){
+	    	drawm.rndnum();
+	    	},ms)
+	    },
+
+	}
+
+	let cvs = document.querySelector("#cvs");
+	let ctx = cvs.getContext("2d");
+	
+	let	ch = cvs.height = innerHeight
+	let	cw = cvs.width = innerWidth;
+	let csh = innerHeight;
+	let csw = innerWidth;
+	let	cols = 0;
+	let curc = 0;
+	let	c = [];
+	let	rndn = [];
+	let	marr = [cw,ch,cw,ch];
+	let gc = drawm.getCol.bind();
+	let co = 0;
+	let arrc = [9,19,119,219];
+
+function run(){
+	//drawm.mainarr = [0,0,cw,ch];
+	drawm.resetSize();
+	drawm.delay(100);
+}
+	run()
+
+
+</script>
+</html>
+
+			
